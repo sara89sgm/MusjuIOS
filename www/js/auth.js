@@ -1,36 +1,4 @@
-//Initialize Facebook
-	var accessTokenFB='';
-	//var idUser='';
-	window.onload = function() {
-        /* Instantiate the global sp object; include models */
-       
-        /* Set the permissions you want from the user. For more
-         * info, check out http://bit.ly/A4KCW3 */
-        var permissions = ['user_about_me'];
-        var app_id = '403799456325756';
-        var fbButtonHTML = document.getElementById('fb-login');
 
-        fbButtonHTML.addEventListener('click', authFB);
-
-        /*function authFB() {
-            auth.authenticateWithFacebook(app_id, permissions, {
-                onSuccess: function(accessToken, ttl) {
-                	accessTokenFB=accessToken;
-                	
-                	$("#login").hide();
-                	$("#restApp").show();
-                	
-                	//getUserInfor();
-                	window.location.href = 'home';
-                    
-                },
-                onFailure: function(error) {
-                    console.log('Authentication failed with error: ' + error);
-                },
-                onComplete: function() { }
-            });
-        }*/
-    }
 	
 	
 	function login(){
