@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+<link rel="stylesheet" href="css/my.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.scrollview.css" />
+<style>
+/* App custom styles */
+</style>
+    <link type="text/css" href="css/jqueryui/jquery-ui-1.8.22.custom.css" rel="Stylesheet" />	
+    
+    <script type="text/javascript" src="js/jquery-ui-1.8.22.custom.min.js"></script>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery.mobile-1.1.0.min.js"></script>
+
+
+<script src="js/parse-1.0.15.js"></script>
+
+<script type="text/javascript" src="js/musju.js"></script>
+<script type="text/javascript" src="js/auth.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.scrollview.js"></script>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+	<div data-role="page" id="login">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+		</div>
+		<div data-role="content">
+			<div style="width: 288px; height: 100px; position: relative;">
+				<img src="images/musju25.png" alt="image"
+					style="display: block; margin-left: auto; margin-right: auto;"
+					height="100px" />
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<label for="textinput1"> </label> <input id="loginUserName"
+						placeholder="" value="user" type="text" />
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<label for="textinput2"> </label> <input id="loginPass"
+						placeholder="" value="password" type="password" />
+				</fieldset>
+			</div>
+			<span>
+                <a data-role="button" data-transition="fade"
+				data-theme="b" href="#home" onclick="return login()">Login </a> 
+                <a
+				data-role="button" data-transition="fade" data-theme="b"
+				href="#singup">Sing Up </a></span><a href="#" id="fb-login"> <img
+				src="images/fb-login.png" />
+
+			</a>
+		</div>
+	</div>
+	<!-- HOME PAGE -->
+	<div data-role="page" id="home">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+			<div data-role="navbar">
+				<ul>
+					<li><a class="ui-btn-active ui-state-persist" href="#home">
+							Home </a></li>
+					<li><a href="#playlist"> Playlist </a></li>
+					<li><a href="#pubs"> Pubs </a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+
+			<a href="#playlistShow" data-role="button"
+				onclick="return getPlaylists();">Show playlists</a>
+			<div data-role="fieldcontain" id="requestSong">
+				
+                
+                <div  id="searchSong" class="ui-widget jqueryui">
+                    <p> SEARCH <input  type="text" id="spotify_song_search" class="jqueryUI"/> <a onclick="requestSong()" class="">Request!</a>
+                    </p>
+                    <a id='track'></a>​</div>
+               
+                
+                
+			</div>
+
+			<br /> 
+		</div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#page1" data-theme="a"> Profile </a></li>
+					<li><a href="#page1" data-theme="a"> Friends </a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<!-- SING UP PAGE -->
+	<div data-role="page" id="singup">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+
+		</div>
+		<div data-role="content">
+			<div style="width: 288px; height: 100px; position: relative;">
+				<img src="images/musju25.png" alt="image"
+					style="display: block; margin-left: auto; margin-right: auto;"
+					height="100px" />
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<label for="singupUserName"> </label> <input id="singupUserName"
+						placeholder="" value="user" type="text" />
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<label for="singupPass"> </label> <input id="singupPass"
+						placeholder="" value="password" type="password" />
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<label for="email"> </label> <input id="email"
+						placeholder="" value="email" type="email" />
+				</fieldset>
+			</div>
+			<span> <a data-role="button" data-transition="fade"
+				data-theme="b" href="#login" onclick="return singUp();">Sing Up </a></span> </a>
+		</div>
+
+	</div>
+	<div data-theme="a" data-role="footer" data-position="fixed"></div>
+	</div>
+    
+    
+    <!-- PLAYLISTS SHOW PAGE -->
+	<div data-role="page" id="playlistShow">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#home"> Home </a></li>
+					<li><a class="ui-btn-active ui-state-persist" href="#playlist">
+                        Playlist </a></li>
+					<li><a href="#pubs"> Pubs </a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview" data-divider-theme="b" id="playlistsShowList" data-scroll="true" data-inset="true">
+				
+                
+			</ul>
+		</div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#page1" data-theme="a"> Profile </a></li>
+					<li><a href="#page1" data-theme="a"> Friends </a></li>
+				</ul>
+			</div>
+            
+		</div>
+	</div>
+    
+    <!-- PUBS  PAGE -->
+	<div data-role="page" id="homeP">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+			<div data-role="navbar">
+				<ul>
+					<li><a class="ui-btn-active ui-state-persist" href="#home">
+							Home </a></li>
+					<li><a href="#playlist"> Playlist </a></li>
+					<li><a href="#pubs"> Pubs </a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content" id="showPlaylists"></div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#page1" data-theme="a"> Profile </a></li>
+					<li><a href="#page1" data-theme="a"> Friends </a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div data-role="page" id="pubs">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#home"> Home </a></li>
+					<li><a href="#playlist"> Playlist </a></li>
+					<li><a class="ui-btn-active ui-state-persist" href="#pubs">
+							Pubs </a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+			<img
+				src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false"
+				width="288" height="200" />
+			<ul data-role="listview" data-divider-theme="b" data-inset="true">
+				<li data-theme="c"><a href="#" data-transition="slide">
+						"The George" - Rock - 0.1 miles </a></li>
+				<li data-theme="c"><a href="#page1" data-transition="slide">
+						"Arms" - Pop -0.3 miles </a></li>
+				<li data-theme="c"><a href="#page1" data-transition="slide">
+						Walkabout - Electro-Dance -0.8 miles </a></li>
+
+			</ul>
+		</div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a href="#page1" data-theme="a"> Profile </a></li>
+					<li><a href="#page1" data-theme="a"> Friends </a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    
+    <!-- PLAYLIST PAGE -->
+	<div data-role="page" id="playlist">
+		<div data-theme="a" data-role="header">
+			<h3>Musju</h3>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#home"> Home </a></li>
+					<li><a class="ui-btn-active ui-state-persist" href="#playlist">
+							Playlist </a></li>
+					<li><a href="#pubs"> Pubs </a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview" data-divider-theme="b" data-inset="true" id="tracksPlaylist" data-scroll="true">
+				
+
+			</ul>
+		</div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#page1" data-theme="a"> Profile </a></li>
+					<li><a href="#page1" data-theme="a"> Friends </a></li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+	<div id="fb-root"></div>
+	<!-- cordova -->
+	<script src="cordova-1.7.0.js"></script>
+	<!-- cordova facebook plugin -->
+
+
+
+</body>
+</html>
