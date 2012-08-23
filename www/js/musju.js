@@ -3,12 +3,13 @@
 Parse.initialize("UD2mcikqPwaRl7i4a8erG5wSZvj9XcfAfGNR6vXn",
 		"29je5N9Fz4tz7ymc9XcQ4ymStqyfNVQzIIgwtG2J");
 
-(function() {
+
 	$("#spotify_song_search").autocomplete({
 		source : function(request, response) {
 			$.get("http://ws.spotify.com/search/1/track.json", {
 				q : request.term
 			}, function(data) {
+                  alert("hello");
 				var firsts = new Array();
 				firsts[0] = data.tracks[0];
 				firsts[1] = data.tracks[1];
@@ -29,7 +30,6 @@ Parse.initialize("UD2mcikqPwaRl7i4a8erG5wSZvj9XcfAfGNR6vXn",
 
 		}
 	});
-});
 
 var actualPlaylistId = '';
 $(document).ready(function() {
