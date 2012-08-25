@@ -1,7 +1,7 @@
 
 	
 	
-	function login(){
+	function loginParse(){
 		
 		Parse.User.logIn($("#loginUserName").val(), $("#loginPass").val(), {
 			  success: function(user) {
