@@ -81,7 +81,8 @@
 				
                 
                 <div  id="searchSong" class="ui-widget jqueryui">
-                    <p> SEARCH <input  type="text" id="spotify_song_search" class="jqueryUI"/> <a onclick="requestSong()" class="">Request!</a>
+                    <p>  <input  type="text" id="spotify_song_search" class="jqueryUI"/> <a data-role="button" data-transition="fade"
+                        data-theme="b" href="#spotifyresults" onclick="searchSongRequest()">Search </a> 
                     </p>
                     <a id='track'></a>​</div>
                
@@ -138,6 +139,24 @@
 	</div>
 	<div data-theme="a" data-role="footer" data-position="fixed"></div>
 	</div>
+    
+    <!--SPOTIFY RESULTS PAGE -->
+    
+   
+    
+    <div data-role="page" id="spotifyresults">
+        <div data-role="header" data-theme="a">
+            <h1 data-theme="a">WIMM</h1>
+        </div><!-- /header -->
+        <div data-role="content">
+            
+            
+            <div class="content-primary">	
+                <ul data-role="listview" id="listResultsSpotify">
+                </ul>
+            </div><!--/content-primary -->	
+        </div>
+    </div>
     
     
     <!-- PLAYLISTS SHOW PAGE -->

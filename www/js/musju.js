@@ -112,11 +112,11 @@ function voteTrack(id) {
 	query.get(id, {
 		success : function(track) {
 			votes = track.get("votes");
-			alert("Actual:" + votes);
+		
 			votes++;
 			track.set("votes", votes);
 			newVotes = track.get("votes");
-			alert("Actual:" + newVotes);
+			alert("You have voted the track! Wait to listen to it! :)");
 			track.save();
 			// The object was retrieved successfully.
 		},
@@ -128,6 +128,64 @@ function voteTrack(id) {
 	});
 }
 
-function addTrack() {
+function addTrack(uri) {
 
+    var RequestTrack = Parse.Object.extend("RequestTrack");
+    var newtrack = new RequestTrack();
+    alert("hello");
+    newtrack.set("urlTrack", uri);
+    newtrack.set("urlPlaylist", localStorage.urlPlaylist);
+    newtrack.set("idUser", sessionStorage.idUser);
+  
+    
+    newtrack.save(null, {
+                  success : function(newplaylist) {
+                  alert("You have added the song succesfully :) ");
+                  },
+                  error : function(newplaylist, error) {
+                  // The save failed.
+                  // error is a Parse.Error with an error code and
+                  // description.
+                  }
+                  });
+
+}
+
+
+function searchSongRequest(){ 
+    var name= $("#spotify_song_search").val();
+    
+    var url="http://ws.spotify.com/search/1/track.json?q="+name;
+    url=encodeURI(url);
+    $.ajax({
+           url: url,
+           dataType: "json",
+           success: function(data, textStatus, jqXHR){
+           
+           fillResultsRequest(data);
+           },
+           error: function(jqXHR, textStatus, errorThrown){
+           alert('login error: ' + textStatus);
+           }
+           });
+    
+}
+
+
+function fillResultsRequest(data){
+    $("#listResultsSpotify").empty();
+    var track=data.tracks[0];
+    var i=0;
+    
+    while(((typeof(track)) != 'undefined') && (i<10)){
+        var uriT="'"+track.href+"'";
+        
+       $("#listResultsSpotify").append('<li><a href="#playlist" onclick="addTrack('+uriT+');"><h3>'+track.name+' ('+track.artists[0].name+') </h3></a></li>');
+        i++;
+        track=data.tracks[i];
+        
+    }
+    $("#listResultsSpotify").listview('refresh');
+    
+    
 }
