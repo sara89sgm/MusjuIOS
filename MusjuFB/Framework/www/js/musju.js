@@ -1,3 +1,5 @@
+/** Main file, config value for database Parse and main functions for the app **/
+
 /** PARSE **/
 
 Parse.initialize("UD2mcikqPwaRl7i4a8erG5wSZvj9XcfAfGNR6vXn",
@@ -12,6 +14,8 @@ $(document).ready(function() {
 		$("requestSong").hide();
 	}
 });
+
+//Function to set a Playlist in the app and get the data from it, showing the list of tracks 
 
 function joinPlaylist(url) {
 	var TrackPlaylistMusju = Parse.Object.extend("TrackPlaylistMusju");
@@ -45,8 +49,10 @@ function joinPlaylist(url) {
 	});
 }
 
+//Function to get all the available Playlists from the database.
+
 function getPlaylists() {
-	alert("hola");
+	
 	var PlaylistMusju = Parse.Object.extend("PlaylistMusju");
 	var query = new Parse.Query(PlaylistMusju);
 	query
@@ -81,6 +87,8 @@ function getPlaylists() {
 			});
 }
 
+//Function to add a vote for a specific track
+
 function voteTrack(id) {
 	var TrackPlaylistMusju = Parse.Object.extend("TrackPlaylistMusju");
 	var query = new Parse.Query(TrackPlaylistMusju);
@@ -102,6 +110,8 @@ function voteTrack(id) {
 		}
 	});
 }
+
+//Function to add a track to the actual Playlist selected by the user
 
 function addTrack(uri) {
 
@@ -126,6 +136,8 @@ function addTrack(uri) {
 
 }
 
+//Function to search a track in the Spotify library
+
 
 function searchSongRequest(){ 
     var name= $("#spotify_song_search").val();
@@ -145,6 +157,8 @@ function searchSongRequest(){
            });
     
 }
+
+//function to show the results from the Spotify's search
 
 
 function fillResultsRequest(data){

@@ -1,10 +1,12 @@
 
-
+/**SPACE.JS contains all the functions that manages the "Pubs" recommendations except the getGenre from a pub and it also contains the MusicIn (checkIn +track) functions **/
 
 var idSongObj='';
 
-var availablePlaces=new Array(); 
 
+var availablePlaces=new Array(); //Array to store the places found near the user
+
+//Function that get the Geolocalitation from HTML5 or from the GPS in case of a device and call getPlaceMap to get the places near that location.
 function showMap(){
 navigator.geolocation.getCurrentPosition(function(data) {
                                          localStorage.lat = data['coords']['latitude'];
@@ -13,7 +15,8 @@ navigator.geolocation.getCurrentPosition(function(data) {
                                          });
 }
 
-
+//get the Facebook Places near the location of the user 
+// it is called from ShowMap()
 function getPlacesMap(){
    
     
@@ -21,7 +24,7 @@ function getPlacesMap(){
     function initialize() {
         var myOptions = {
         zoom: 15,
-        center: new google.maps.LatLng(37.7879938,-122.4074374),
+        center: new google.maps.LatLng(localStorage.lat,localStorage.lng),
         mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map_object = new google.maps.Map(document.getElementById('map_object'), myOptions);
@@ -56,6 +59,10 @@ function getPlacesMap(){
     
 }
 
+//require venueID, placeName
+
+//function to get the genre of the pub and show a list of them. If it doesn't have enough data about a puba it doesn't list it, and if it detect that there is data but the genre is not calculated, the getTopGenreForSpecificVenue(venueID); is called.
+
 function showGenre(venueID, placeName){
    
     var VenuesGenre = Parse.Object.extend("VenuesGenre");
@@ -76,7 +83,7 @@ function showGenre(venueID, placeName){
                 query.find({
                            success: function(results) {
                            if(results.length>0){
-                           alert("encontrado pero calculando");
+                           
                            getTopGenreForSpecificVenue(venueID);
                            setTimeout('showGenre('+venueID+','+placeName+')', 1000);
                            }else{
@@ -108,7 +115,7 @@ function showGenre(venueID, placeName){
     
 }
 
-
+//Search a song in the Spotify library to do the Music In
 function searchSong(){ 
     var name= $("#songName").val();
     
@@ -129,6 +136,7 @@ function searchSong(){
 }
 
 
+//Show the results from the Spotify search
 function fillResults(data){
     $("#listResults").empty();
     var track=data.tracks[0];
@@ -153,6 +161,8 @@ function fillResults(data){
     
 }
 
+//require name, href and artistID from the track
+//function to save the track selected by the user
 function saveSong(name, href, artistID){
     
      localStorage.nameSongSelected=name;
@@ -164,7 +174,7 @@ function saveSong(name, href, artistID){
 
 
 
-
+// Get the current position again and call the getPlaces() function
 
 function getLocations()
 {
@@ -182,7 +192,7 @@ function getLocations()
     }
 }
 
-
+// function to get the facebook places near the location of the user
 
 function getPlaces(){
     
@@ -208,6 +218,8 @@ function getPlaces(){
            });
 }
 
+//store the data about the place selected by the user
+
 function savePlaceSel(p){
    
     localStorage.venueID=availablePlaces[p].id;
@@ -215,7 +227,7 @@ function savePlaceSel(p){
      $("#finalMusic").append("<p>"+localStorage.nameSongSelected+"at "+localStorage.venueName);
 }
 
-
+//Save the track and place selected by the user in the database (Music In)
 function saveTrackMusic(){
     var VenuesTracksTest = Parse.Object.extend("VenuesTracksTest");
     var venueTrack = new VenuesTracksTest();

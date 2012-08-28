@@ -1,5 +1,5 @@
 
-	
+	/** authParse contains the function related with the login and signUp in PArse **/
 	
 	function loginParse(){
 		
@@ -47,28 +47,6 @@
 			});
 	}
 	
-	
-	function getUserInfor(){
-		$.ajax({
-	        type: 'GET',
-	        contentType: 'application/json',
-	        url: 'https://graph.facebook.com/me?access_token=' + accessTokenFB,
-	        dataType: "json",
-	        
-	        success: function(data, textStatus, jqXHR){
-	        	
-	        	localStorage.idUser=data.id;
-	    		getPlaylistUser(localStorage.idUser);
-	        	
-	            
-	        },
-	        error: function(jqXHR, textStatus, errorThrown){
-	            alert('login error: ' + textStatus);
-	        }
-	    });
-	    
-		
-	}
 	
 	
 	
