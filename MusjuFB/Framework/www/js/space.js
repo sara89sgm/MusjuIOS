@@ -184,7 +184,7 @@ function getLocations()
                                                   localStorage.lat = data['coords']['latitude'];
                                                  localStorage.lng = data['coords']['longitude'];
                                                  alert("Lat"+localStorage.lat+"Long"+localStorage.lng);
-                                                 getPlaces();}
+                                                 getPlacesSpa();}
                                                  );
       
     } else {
@@ -194,18 +194,19 @@ function getLocations()
 
 // function to get the facebook places near the location of the user
 
-function getPlaces(){
+function getPlacesSpa(){
     
     FB.api('search?center='+localStorage.lat+','+localStorage.lng, { limit: 10, type: 'place', distance : 1000 }, function(response) {
-           
+          
            var place=response.data[0];
            var i=0;
-                       while(((typeof(place)) != 'undefined') && (i<10)){
+        while(((typeof(place)) != 'undefined') && (i<10)){
            var idP="'"+place.id+"'";
           var nameP=place.name;
            nameP=nameP.replace("'","");
            
            availablePlaces[i]=place;
+         
           
            $("#listResultsLocations").append('<li><a href="#presend" onclick="savePlaceSel('+i+');"><h3>'+place.name+' </h3></a></li>');
         
